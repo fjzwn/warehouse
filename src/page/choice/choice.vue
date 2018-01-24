@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    this is choice page
+    <img src="../../assets/1.png" />
+    <p>this is choice page</p>
+    <mt-button type="default">default</mt-button>
   </div>
 </template>
 
@@ -13,7 +15,9 @@ export default {
 }
 </script>
 
-<style>
+<style lang="less">
+@import '../../styles/common.less';
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

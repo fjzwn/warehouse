@@ -1,4 +1,4 @@
-# y
+# warehouse
 
 > A Vue.js project about warehouse
 
