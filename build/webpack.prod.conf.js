@@ -6,7 +6,6 @@ const config = require('../config')
 const merge = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base.conf')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
@@ -99,7 +98,7 @@ const webpackConfig = merge(baseWebpackConfig, {
         ignore: ['.*']
       }
     ])
-  ]
+  ].concat(utils.htmlPlugin())
 })
 
 if (config.build.productionGzip) {
@@ -119,24 +118,6 @@ if (config.build.productionGzip) {
     })
   )
 }
-
-let pages = utils.getEntries('./src/page/**/*.html')
-for(let page in pages) {
-  let pageConfig = {
-    filename: page + '.html',
-    template: pages[page],
-    inject: true,
-    minify: {
-      removeComments: true,
-      collapseWhitespace: true,
-      removeAttributeQuotes: true
-    },
-    chunksSortMode: 'dependency',
-    chunks: [page, "vendor", "manifest"]
-  }
-  webpackConfig.plugins.push(new HtmlWebpackPlugin(pageConfig))
-}
-
 
 if (config.build.bundleAnalyzerReport) {
   const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin

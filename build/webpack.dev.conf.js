@@ -6,7 +6,6 @@ const merge = require('webpack-merge')
 const path = require('path')
 const baseWebpackConfig = require('./webpack.base.conf')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
 
@@ -59,21 +58,9 @@ const devWebpackConfig = merge(baseWebpackConfig, {
         ignore: ['.*']
       }
     ])
-  ]
+  ].concat(utils.htmlPlugin())
 })
 
-let pages = utils.getEntries('./src/page/**/*.html')
-console.log(pages)
-for(let page in pages) {
-  let pageConfig = {
-    filename: page + '.html',
-    template: pages[page],
-    inject: true,
-    chunks: [page, "vendor", "manifest"]
-  }
-  console.log(pageConfig)
-  devWebpackConfig.plugins.push(new HtmlWebpackPlugin(pageConfig))
-}
 
 module.exports = new Promise((resolve, reject) => {
   portfinder.basePort = process.env.PORT || config.dev.port
