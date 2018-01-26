@@ -1,9 +1,7 @@
 <template>
   <div id="app">
     <mt-header fixed title="预选小仓库">
-      <a href="javascript:;" slot="left">
-        <mt-button icon="back"></mt-button>
-      </a>
+      <a href="javascript:;" slot="left" class="back"></a>
       <a href="javascript:;" slot="right">仓位说明</a>
     </mt-header>
 
@@ -321,7 +319,7 @@ export default {
     }
   },
   computed: {
-    selectCategoryIds: function () {
+    selectCategoryIds () {
       let ids = []
       this.selectCategoryList.forEach(item => ids.push(item.id))
       return ids
@@ -378,6 +376,14 @@ export default {
 
   .mint-header {
     .px2rem(height, 90);
+
+    .back {
+      display: inline-block;
+      .px2rem(width, 24);
+      .px2rem(height, 46);
+      background: url('../../assets/arrow-left.png') no-repeat 0 0;
+      background-size: cover;
+    }
   }
 
   .map {
@@ -724,7 +730,7 @@ export default {
 
       .icon-wrap {
         .px2rem(padding, 30);
-        .px2rem(margin-top, -15);
+        .px2rem(margin-top, -36);
         background-color: #4d4d4d;
         border-radius: 50%;
 
@@ -749,7 +755,7 @@ export default {
       .px2rem(padding-left, 45);
       .px2rem(padding-right, 45);
       font-size: 14px;
-      background-color: #52c95d;
+      background-color: @color-primary;
     }
   }
 }

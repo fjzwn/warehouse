@@ -1,7 +1,7 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
-import App from './choice.vue'
+import App from './preselect.vue'
 
 import { Button, Header, DatetimePicker, Picker, Popup, Radio, Navbar, TabItem, TabContainer, TabContainerItem } from 'mint-ui'
 import '../../styles/theme.less'
