@@ -3,8 +3,13 @@
 import Vue from 'vue'
 import App from './recommend.vue'
 
-Vue.config.productionTip = false
+import { Header, Tabbar, TabItem } from 'mint-ui'
+import '../../styles/theme.less'
+Vue.component(Header.name, Header)
+Vue.component(Tabbar.name, Tabbar)
+Vue.component(TabItem.name, TabItem)
 
+Vue.config.productionTip = false
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
