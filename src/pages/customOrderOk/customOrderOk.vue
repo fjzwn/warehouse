@@ -82,7 +82,7 @@
       <p class="message">请提前联系确认具体的上门时间。</p>
       <div class="cell">
         <p>使用优惠券</p>
-        <p class="price"><span>新用户抵扣</span><span class="icon"></span></p>
+        <p class="price discount"><span>新用户抵扣</span><span class="icon"></span></p>
       </div>
     </div>
 
@@ -298,8 +298,12 @@ export default {
           color: @gray-font-color;
         }
 
-        &:last-child {
-          color: #ed9d25;
+        &.price {
+          color: #f00;
+
+          &.discount {
+            color: #ed9d25;
+          }
 
           span.icon {
             display: inline-block;
@@ -331,19 +335,17 @@ export default {
       .px2rem(padding-right, 49);
       font-size: 13px;
 
-      p {
-        &.price {
-          .px2rem(width, 100);
-          color: red;
+      p.price {
+        .px2rem(width, 100);
+        color: red;
 
-          &.primary {
-            color: #333;
-          }
+        &.primary {
+          color: #333;
         }
+      }
 
-        &.invoice {
-          color: @gray-font-color;
-        }
+      p.invoice {
+        color: @gray-font-color;
       }
     }
   }

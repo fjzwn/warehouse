@@ -3,8 +3,11 @@
 import Vue from 'vue'
 import App from './orderOk.vue'
 
-Vue.config.productionTip = false
+import { Header } from 'mint-ui'
+import '../../styles/theme.less'
+Vue.component(Header.name, Header)
 
+Vue.config.productionTip = false
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

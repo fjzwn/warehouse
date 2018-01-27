@@ -368,8 +368,6 @@ export default {
 #app {
   display: flex;
   flex-direction: column;
-  height: 100%;
-  overflow-y: scroll;
   background-color: @bg-color;
  .px2rem(padding-top, 90);
  .px2rem(padding-bottom, 100);
