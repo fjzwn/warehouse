@@ -1,0 +1,92 @@
+@color-primary: #52c95d;
+
+/* header */
+.mint-header {
+  color: #000;
+  background-color: #fff;
+
+  .is-left {
+    a {
+      color: @color-primary;
+    }
+  }
+
+  .is-right {
+    color: #d5d5d5;
+  }
+}
+
+/* button */
+.mint-button:not(.is-disabled):active::after {
+    opacity: .2 /* .6 */
+}
+.mint-button--primary {
+    background-color: @color-primary;
+}
+.mint-button--primary.is-plain {
+    border: 1px solid @color-primary;
+    color: @color-primary
+}
+
+/* badge */
+.mint-badge.is-primary {
+  background-color: @color-primary
+}
+
+/* switch */
+.mint-switch-input:checked + .mint-switch-core {
+  border-color: @color-primary;
+  background-color: @color-primary;
+}
+
+/* navbar */
+.mint-navbar .mint-tab-item.is-selected {
+  border-bottom: 3px solid @color-primary;
+  color: @color-primary;
+}
+
+/* tabbar */
+.mint-tabbar > .mint-tab-item.is-selected {
+  color: @color-primary;
+}
+
+/* searchbar */
+.mint-searchbar-cancel {
+  color: @color-primary;
+}
+
+/* checkbox */
+.mint-checkbox-input:checked + .mint-checkbox-core {
+  background-color: @color-primary;
+  border-color: @color-primary;
+}
+
+/* radio */
+.mint-radio-input:checked + .mint-radio-core {
+  background-color: @color-primary;
+  border-color: @color-primary;
+}
+
+/* range */
+.mt-range-progress {
+  background-color: @color-primary;
+}
+
+/* progress */
+.mt-progress-progress {
+  background-color: @color-primary;
+}
+
+/* msgbox */
+.mint-msgbox-confirm {
+  color: @color-primary;
+}
+.mint-msgbox-confirm:active {
+  color: @color-primary;
+}
+
+/* datetime */
+.mint-datetime-action {
+  color: @color-primary;
+}
+

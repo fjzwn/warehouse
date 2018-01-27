@@ -2,19 +2,46 @@
 const path = require('path')
 const config = require('../config')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const merge = require('webpack-merge')
 const packageConfig = require('../package.json')
 const glob = require('glob')
 
-exports.getEntries = function(globPath) {
-  let entries = {}, basename, tmp, pathname
-  glob.sync(globPath).forEach(function (entry) {
-    basename = path.basename(entry, path.extname(entry))
-    tmp = entry.split('/').splice(-3)
-    // pathname = tmp.splice(0, 1) + '/' + basename               // 正确输出js和html的路径
-    pathname = basename
-    entries[pathname] = entry
+const PAGE_PATH = path.resolve(__dirname, '../src/pages')
+exports.getEntries = function() {
+  let entries = {}
+  const entryFiles = glob.sync(PAGE_PATH + '/**/*.js')
+  entryFiles.forEach(function (entry) {
+    let filename = path.basename(entry, path.extname(entry))
+    entries[filename] = entry
   })
   return entries
+}
+
+exports.htmlPlugin = function() {
+  let entryHtml = glob.sync(PAGE_PATH + '/**/*.html')
+  let arr = []
+  entryHtml.forEach((entry) => {
+    let filename = path.basename(entry, path.extname(entry))
+    let conf = {
+      template: entry,
+      filename: filename + '.html',
+      chunks: ['manifest', 'vendor', filename],
+      inject: true
+    }
+    if (process.env.NODE_ENV === 'production') {
+        conf = merge(conf, {
+            minify: {
+              removeComments: true,
+              collapseWhitespace: true,
+              removeAttributeQuotes: true
+            },
+            chunksSortMode: 'dependency'
+        })
+    }
+    arr.push(new HtmlWebpackPlugin(conf))
+  })
+  return arr
 }
 
 exports.assetsPath = function (_path) {

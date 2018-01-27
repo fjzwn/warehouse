@@ -19,9 +19,14 @@ const createLintingRule = () => ({
   }
 })
 
+let entries = utils.getEntries()
+for(let item in entries) {
+  entries[item] = ['babel-polyfill', entries[item]]
+}
+
 module.exports = {
   context: path.resolve(__dirname, '../'),
-  entry: Object.assign({ polyfill: 'babel-polyfill' }, utils.getEntries('./src/page/**/*.js')),
+  entry: entries,
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',

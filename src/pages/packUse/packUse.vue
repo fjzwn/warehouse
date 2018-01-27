@@ -1,14 +1,14 @@
 <template>
   <div id="app">
-    this is warelist page
+    this is paybooking page
   </div>
 </template>
 
 <script>
 export default {
-  name: 'warelist',
+  name: 'paybooking',
   mounted () {
-    console.log(111)
+
   }
 }
 </script>

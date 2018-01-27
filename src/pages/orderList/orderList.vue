@@ -1,23 +1,19 @@
 <template>
   <div id="app">
-    <img src="../../assets/1.png" />
-    <p>this is choice page</p>
-    <mt-button type="default">default</mt-button>
+    this is orderList page
   </div>
 </template>
 
 <script>
 export default {
-  name: 'choice',
+  name: 'orderList',
   mounted () {
-    console.log(111)
+
   }
 }
 </script>
 
-<style lang="less">
-@import '../../styles/common.less';
-
+<style>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
