@@ -17,31 +17,30 @@
         <div
           v-for="subItem in item.list"
           :key="subItem.id"
-          :class="subItem.overdue == 1 ? 'grey' : ''"
           >
-          <ul class="order-info">
+          <ul class="order-info" :class="subItem.overdue == 1 ? 'overdue-status' : ''">
             <li class="cell order-num">
               <span>编号：{{ subItem.orderNum }}</span>
-              <span class="order-status" :class="subItem.overdue == 1 ? 'grey' : ''">{{ subItem.orderStatus }}</span>
+              <span class="order-status">{{ subItem.orderStatus }}</span>
             </li>
             <li class="cell">
               <span>预定租期：<b>{{ subItem.bookDate }}</b></span>
             </li>
             <li class="cell">
-              <span>合计金额：<i class="red-font" :class="subItem.overdue == 1 ? 'grey' : ''">¥{{ subItem.cost }}</i></span>
+              <span>合计金额：<i class="red-font">¥{{ subItem.cost }}</i></span>
             </li>
             <li class="capacity">
               <span>仓位容量：</span>
               <p>
-                <span v-for="(capacityItem, key) in subItem.capacity" :key="key" :class="subItem.overdue == 1 ? 'grey-bg' : ''">{{ capacityItem }}</span>
+                <span v-for="(capacityItem, key) in subItem.capacity" :key="key">{{ capacityItem }}</span>
               </p>
             </li>
             <li class="cell">
-              <span>到期时间：<i class="red-font" :class="subItem.overdue == 1 ? 'grey' : ''">{{ subItem.cutOffDate }}</i></span>
+              <span>到期时间：<i class="red-font">{{ subItem.cutOffDate }}</i></span>
             </li>
           </ul>
 
-          <ul class="contact-way">
+          <ul class="contact-way" :class="subItem.overdue == 1 ? 'overdue-status' : ''">
             <li class="cell">
               <p><span class="icon store"></span>门店地址: <i>{{ subItem.address }}</i></p>
               <p><span class="icon address"></span></p>
@@ -52,11 +51,11 @@
             </li>
           </ul>
 
-          <div class="order-act">
+          <div class="order-act" :class="subItem.overdue == 1 ? 'overdue-status' : ''">
             <p></p>
             <div>
               <span class="button order-detail-act">订单详情</span>
-              <span class="button order-renew-act" :class="subItem.overdue == 1 ? 'grey' : 'active'">立即续费</span>
+              <span class="button order-renew-act">立即续费</span>
             </div>
           </div>
         </div>
@@ -89,7 +88,7 @@ export default {
               cutOffDate: '2018-01-01',
               address: '上海市杨浦区国顺东路800号1-3F',
               tel: 13055213031,
-              overdue: 0,
+              overdue: 0
             },
             {
               id: 5,
@@ -101,7 +100,7 @@ export default {
               cutOffDate: '2018-01-01',
               address: '上海市杨浦区国顺东路800号1-3F',
               tel: 13055213031,
-              overdue: 1,
+              overdue: 1
             }
           ]
         },
@@ -121,7 +120,7 @@ export default {
               cutOffDate: '2018-01-01',
               address: '上海市杨浦区国顺东路800号1-3F',
               tel: 13055213031,
-              overdue: 0,
+              overdue: 0
             }
           ]
         },
@@ -141,7 +140,7 @@ export default {
               cutOffDate: '2018-01-01',
               address: '上海市杨浦区国顺东路800号1-3F',
               tel: 13055213031,
-              overdue: 0,
+              overdue: 0
             }
           ]
         },
@@ -161,7 +160,7 @@ export default {
               cutOffDate: '2018-01-01',
               address: '上海市杨浦区国顺东路800号1-3F',
               tel: 13055213031,
-              overdue: 0,
+              overdue: 0
             }
           ]
         }
@@ -187,14 +186,6 @@ export default {
   font-size: 12px;
   .red-font {
     color: red;
-  }
-
-  .grey {
-    color: #bababa !important;
-  }
-
-  .grey-bg {
-    background-color: #bababa !important;
   }
 
   .mint-header {
@@ -275,6 +266,16 @@ export default {
         }
       }
     }
+
+    &.overdue-status {
+      color: #bababa;
+      b, .red-font, .order-status{
+        color: #bababa !important;
+      }
+      .capacity p span {
+        background-color: #bababa;
+      }
+    }
   }
 
   .contact-way {
@@ -345,6 +346,10 @@ export default {
         }
       }
     }
+
+    &.overdue-status {
+      color: #bababa;
+    }
   }
 
   .order-act {
@@ -376,6 +381,9 @@ export default {
       line-height:24px;
       border: 1px solid #bababa;
       border-radius: 12px;
+    }
+    &.overdue-status {
+      color: #bababa;
     }
   }
 
