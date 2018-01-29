@@ -20,23 +20,26 @@
           >
           <ul class="order-info" :class="subItem.overdue == 1 ? 'overdue-status' : ''">
             <li class="cell order-num">
-              <span>编号：{{ subItem.orderNum }}</span>
+              <span class="order-number">编号：{{ subItem.orderNum }}</span>
               <span class="order-status">{{ subItem.orderStatus }}</span>
             </li>
             <li class="cell">
-              <span>预定租期：<b>{{ subItem.bookDate }}</b></span>
+                <span class="cell-title">预定租期：</span>
+                <b>{{ subItem.bookDate }}</b>
             </li>
             <li class="cell">
-              <span>合计金额：<i class="red-font">¥{{ subItem.cost }}</i></span>
+                <span class="cell-title">合计金额：</span>
+                <i class="red-font">¥{{ subItem.cost }}</i>
             </li>
             <li class="capacity">
-              <span>仓位容量：</span>
+              <span class="cell-title">仓位容量：</span>
               <p>
                 <span v-for="(capacityItem, key) in subItem.capacity" :key="key">{{ capacityItem }}</span>
               </p>
             </li>
             <li class="cell">
-              <span>到期时间：<i class="red-font">{{ subItem.cutOffDate }}</i></span>
+              <span class="cell-title">到期时间：</span>
+              <i class="red-font">{{ subItem.cutOffDate }}</i>
             </li>
           </ul>
 
@@ -185,7 +188,7 @@ export default {
   color: #333;
   font-size: 12px;
   .red-font {
-    color: red;
+    color: #ef2436;
   }
 
   .mint-header {
@@ -202,6 +205,7 @@ export default {
   }
 
   .mint-navbar {
+    color: #939393;
     .mint-tab-item {
       &.is-selected {
         border-bottom: none;
@@ -240,9 +244,16 @@ export default {
         align-items: center;
         justify-content: space-between;
         border-bottom: 2px solid @bg-color;
+        .order-number {
+          color: #b5b5b6;
+        }
         .order-status {
           color: @color-primary;
         }
+      }
+
+      .cell-title {
+        color: #bababa;
       }
     }
 
@@ -253,7 +264,9 @@ export default {
       .px2rem(min-height, 80);
       .px2rem(padding-left, 24);
       .px2rem(padding-right, 49);
-
+      .cell-title {
+        color: #bababa;
+      }
       p {
         flex: 1;
 
@@ -268,12 +281,11 @@ export default {
     }
 
     &.overdue-status {
-      color: #bababa;
       b, .red-font, .order-status{
         color: #bababa !important;
       }
       .capacity p span {
-        background-color: #bababa;
+        background-color: #dedede;
       }
     }
   }
@@ -290,28 +302,12 @@ export default {
       .px2rem(padding-left, 24);
       .px2rem(padding-right, 49);
       border-bottom: 1px solid @bg-color;
+      color: #777575;
 
       p:first-child {
         font-size: 13px;
       }
 
-      p.price {
-        color: #f00;
-
-        &.discount {
-          color: #ed9d25;
-        }
-
-        span.icon {
-          display: inline-block;
-          .px2rem(width, 18);
-          .px2rem(height, 34);
-          .px2rem(margin-left, 28);
-          background: url(../../assets/arrow-right.png) no-repeat 0 0;
-          background-size: cover;
-          vertical-align: middle;
-        }
-      }
       p:first-child {
         flex: 1;
         font-size: 13px;
@@ -346,9 +342,8 @@ export default {
         }
       }
     }
-
-    &.overdue-status {
-      color: #bababa;
+    &.overdue-status p{
+      color:#bababa!important;;
     }
   }
 
@@ -381,12 +376,11 @@ export default {
       line-height:24px;
       border: 1px solid #bababa;
       border-radius: 12px;
-    }
-    &.overdue-status {
       color: #bababa;
-      .active {
-        border: 1px solid ;
-      }
+    }
+    &.overdue-status .order-renew-act{
+      color: #bababa;
+      border: 1px solid #bababa;
     }
   }
 

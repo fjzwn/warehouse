@@ -25,9 +25,7 @@
           <div></div>
           <div>
             <span class="num">
-              <i class="decrease" @click="decrease(item)">-</i>
-              {{ item.num }}件
-              <i class="add" @click="item.num++">+</i>
+              <i class="decrease" @click="decrease(item)">-</i><i class="number-count">{{ item.num > 0 ? item.num + '件' : ' '}}</i><i class="add" @click="item.num++">+</i>
             </span>
           </div>
         </li>
@@ -35,15 +33,20 @@
     </div>
 
     <div class="intro">
-      <div class="info">
-        <h3>包装／捆包／搬运全包服务</h3>
-        <p>为贵重物品提供量身定做木箱的服务，精确保护</p>
+      <div>
+        <div class="info">
+          <h3>包装／捆包／搬运全包服务</h3>
+          <p>为贵重物品提供量身定做木箱的服务，精确保护</p>
+        </div>
+        <p class="line"></p>
+        <div class="contact">
+          <span>咨询详情</span>
+          <h4>悠悠空间服务热线:</h4>
+          <h4>13055213031</h4>
+        </div>
       </div>
-      <p class="line"></p>
-      <div class="contact">
-        <span>咨询详情</span>
-        <h4>悠悠空间服务热线:</h4>
-        <h4>13055213031</h4>
+      <div>
+        <img src="/static/large-warehouse.png"/>
       </div>
     </div>
     <div class="information">·物悠无忧 · 链接都市生活·</div>
@@ -195,6 +198,12 @@ export default {
             vertical-align: middle;
           }
 
+          .number-count {
+            display: inline-block;
+            text-align: center;
+            width: 30px;
+          }
+
           .decrease {
             color: #999;
             border-color: #999;
@@ -214,19 +223,28 @@ export default {
   }
 
   .intro {
-    background: #fff url("/static/large-warehouse.png") no-repeat center right;
-    background-size: 55%;
+    background-color: #fff;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    div:first-child {
+      flex: 5;
+    }
+    div:last-child {
+      flex: 4;
+      padding-right: 10px;
+    }
     .px2rem(padding-top, 20);
     .px2rem(padding-bottom, 20);
     .line {
       .px2rem(margin-left, 30);
       .px2rem(margin-top, 10);
       .px2rem(margin-bottom, 10);
-      width: 40%;
+      width: 60%;
       border: 1px solid #f8f8f8;
     }
     .info, .contact {
-      width: 50%;
       .px2rem(margin-left, 30);
     }
     .info {
