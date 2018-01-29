@@ -3,6 +3,11 @@
 import Vue from 'vue'
 import App from './packUse.vue'
 
+import { Header } from 'mint-ui'
+import '../../styles/theme.less'
+
+Vue.component(Header.name, Header)
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

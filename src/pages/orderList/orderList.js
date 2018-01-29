@@ -3,6 +3,13 @@
 import Vue from 'vue'
 import App from './orderList.vue'
 
+import { Header, Tabbar, TabItem } from 'mint-ui'
+import '../../styles/theme.less'
+
+Vue.component(Header.name, Header)
+Vue.component(Tabbar.name, Tabbar)
+Vue.component(TabItem.name, TabItem)
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

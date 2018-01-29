@@ -55,7 +55,7 @@
             <p></p>
             <div>
               <span class="button order-detail-act">订单详情</span>
-              <span class="button order-renew-act">立即续费</span>
+              <span class="button order-renew-act active">立即续费</span>
             </div>
           </div>
         </div>
@@ -384,6 +384,9 @@ export default {
     }
     &.overdue-status {
       color: #bababa;
+      .active {
+        border: 1px solid ;
+      }
     }
   }
 
