@@ -86,7 +86,7 @@ export default {
           num: 4
         },
         {
-          id: 2,
+          id: 3,
           imgUrl: '/static/personal-warehouse.png',
           title: 'iphone 8',
           intro: '简介简介',
@@ -94,7 +94,7 @@ export default {
           num: 4
         },
         {
-          id: 2,
+          id: 4,
           imgUrl: '/static/personal-warehouse.png',
           title: 'iphone 8',
           intro: '简介简介',
