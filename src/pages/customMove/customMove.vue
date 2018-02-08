@@ -58,6 +58,18 @@
                  @click="selectCategory(subItem)"
                  :src="selectCategoryIds.indexOf(subItem.id) !== -1 ? imgSrc.select : imgSrc.unSelect" />
           </div>
+          <div class="total-info-warp">
+            <div class="total-item">
+              <div class="item">
+                <p>预计搬运物品:</p>
+                <p>两件</p>
+              </div>
+              <div class="item">
+                <p>估算立方数:</p>
+                <p>1.8m³</p>
+              </div>
+            </div>
+          </div>
         </mt-tab-container-item>
       </mt-tab-container>
     </div>
@@ -699,6 +711,15 @@ export default {
         }
       }
     }
+    .total-info-warp {
+      .px2rem(height, 150);
+    }
+    .total-item {
+      width: 57%!important;
+      .item {
+        .px2rem(height, 50)!important;
+      }
+    }
   }
 
   // 住宅类型
@@ -1074,27 +1095,6 @@ export default {
           }
         }
       }
-      .total-info-warp {
-        display: flex;
-        align-items: center;
-        .px2rem(height, 220);
-        color: #fff;
-        .total-item {
-          border-radius: 5px;
-          width: 60%;
-          background-color: @color-warn;
-          margin: auto;
-          .px2rem(padding-left, 40);
-          .px2rem(padding-right, 40);
-          .item {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
-            .px2rem(height, 40);
-          }
-        }
-      }
       .description {
         margin-top: -20px;
         .px2rem(padding-top, 10);
@@ -1111,6 +1111,26 @@ export default {
       }
     }
   }
-
+  .total-info-warp {
+    display: flex;
+    align-items: center;
+    .px2rem(height, 220);
+    color: #fff;
+    .total-item {
+      border-radius: 5px;
+      width: 60%;
+      background-color: @color-warn;
+      margin: auto;
+      .px2rem(padding-left, 40);
+      .px2rem(padding-right, 40);
+      .item {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        .px2rem(height, 40);
+      }
+    }
+  }
 }
 </style>
