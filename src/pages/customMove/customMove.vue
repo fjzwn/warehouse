@@ -911,7 +911,7 @@ export default {
       align-items: center;
       justify-content: space-between;
       .px2rem(height, 100);
-      .px2rem(padding-left, 24);
+      .px2rem(padding-left, 48);
       .px2rem(padding-right, 24);
       border-bottom: 1px solid @bg-color;
       color: #777575;
