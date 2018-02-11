@@ -4,10 +4,8 @@
       <a href="javascript:;" slot="left" class="back"></a>
       <a href="javascript:;" slot="right">仓位说明</a>
     </mt-header>
+    <div id="allmap">
 
-    <div class="map">
-      <img class="colorful-box-icon" src="../../assets/colorful-box.png" />
-      <img src="static/map.png" />
     </div>
 
     <div class="reservation">
@@ -65,7 +63,7 @@
             <span class="name">{{ subItem.name }}</span>
             <span class="num">
               <i class="decrease" @click="decrease(subItem)">-</i>
-              {{ subItem.num }} 件
+              <span class="number">{{ subItem.num != 0 ? subItem.num : '' }} 件</span>
               <i class="add" @click="subItem.num++">+</i>
             </span>
             <span class="volume">{{ subItem.volume }}</span>
@@ -99,9 +97,53 @@
           <p>预估仓位总体积: 6.6m³</p>
         </div>
       </div>
-      <div class="ensure">立即选仓位</div>
+      <div class="ensure" @click="popupVisible = true">立即选仓位</div>
     </div>
-
+    <mt-popup
+      v-model="popupVisible"
+      position="bottom"
+      modal=true>
+      <div class="select-list-warp">
+        <div class="title">
+          <p>已选清单物品：</p>
+          <p><span class="recycle-icon"></span>清空</p>
+        </div>
+        <div class="select-list">
+          <div class="categoty-item" v-for="item in isSelectList.list" :key="item.id" :id="item.id">
+            <img :src="item.imgUrl">
+            <span class="name">{{item.name}}</span>
+            <span class="num">
+              <i class="decrease">-</i> <span class="goods-number">{{ item.num }}</span> 件
+              <i class="add">+</i></span> <span class="volume">{{ item.volume }}
+            </span>
+            <span class="needDis" v-if="item.needDis"><i class="circle"></i>需拆卸</span>
+            <span class="needDis" v-else></span>
+          </div>
+          <div class="total-info-warp">
+            <div class="total-item">
+              <div class="item">
+                <p>预计搬运物品:</p>
+                <p>两件</p>
+              </div>
+              <div class="item">
+                <p>估算立方数:</p>
+                <p>1.8m³</p>
+              </div>
+              <div class="item">
+                <p>搬家拆卸费:</p>
+                <p>¥120</p>
+              </div>
+            </div>
+          </div>
+          <div class="description">
+            <div class="desc-input">
+              <h4>更多物品描述</h4>
+              <textarea name="description" v-model="description" placeholder="请输入200字以内的物品描述" disabled></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mt-popup>
     <mt-datetime-picker
       ref="datePicker"
       type="date"
@@ -315,7 +357,37 @@ export default {
         }
       ],
 
-      description: ''
+      description: '',
+      popupVisible: false,
+      isSelectList: {
+        price: 900,
+        list: [
+          {
+            id: 1,
+            imgUrl: require('../../assets/1.png'),
+            name: '2m衣橱',
+            volume: '1.8m³',
+            num: 2,
+            needDis: 0
+          },
+          {
+            id: 2,
+            imgUrl: require('../../assets/2.png'),
+            name: '25m衣橱',
+            volume: '1.8m³',
+            num: 4,
+            needDis: 1
+          },
+          {
+            id: 3,
+            imgUrl: require('../../assets/3.png'),
+            name: '12m衣橱',
+            volume: '1.8m³',
+            num: 3,
+            needDis: 0
+          }
+        ]
+      }
     }
   },
   computed: {
@@ -324,6 +396,13 @@ export default {
       this.selectCategoryList.forEach(item => ids.push(item.id))
       return ids
     }
+  },
+  mounted () {
+    // 百度地图API功能
+    let map = new BMap.Map("allmap")
+    map.centerAndZoom(new BMap.Point(120.16675,30.25393), 15)
+    let marker = new BMap.Marker(new BMap.Point(120.16675,30.25393))
+    map.addOverlay(marker)
   },
   methods: {
     formatZero (value) {
@@ -371,7 +450,14 @@ export default {
   background-color: @bg-color;
  .px2rem(padding-top, 90);
  .px2rem(padding-bottom, 100);
-
+  font-size: 12px;
+  .mint-popup {
+    width: 100%;
+  }
+  #allmap {
+    width:100%;
+    height:150px;
+  }
   .mint-header {
     .px2rem(height, 90);
 
@@ -636,6 +722,11 @@ export default {
             color: #999;
             border-color: #999;
           }
+          .number {
+            display: inline-block;
+            width: 28px;
+            text-align: center;
+          }
         }
 
         .select-icon {
@@ -716,6 +807,7 @@ export default {
     width: 100%;
     .px2rem(height, 100);
     color: #fff;
+    z-index: 99999;
     font-size: 12px;
 
     .choice-info {
@@ -745,7 +837,6 @@ export default {
         font-size: 13px;
       }
     }
-
     .ensure {
       display: flex;
       align-items: center;
@@ -754,6 +845,132 @@ export default {
       .px2rem(padding-right, 45);
       font-size: 14px;
       background-color: @color-primary;
+    }
+  }
+
+  .select-list-warp {
+    margin-bottom: 70px;
+    .title {
+      .px2rem(padding-left, 24);
+      .px2rem(padding-right, 24);
+      background-color: @bg-color;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      .px2rem(height, 100);
+      .recycle-icon{
+        display: inline-block;
+        .px2rem(width, 34);
+        .px2rem(height, 34);
+        margin-right: 6px;
+        background: url('../../assets/recycle.png') no-repeat 0 0;
+        background-size: cover;
+        vertical-align: middle;
+      }
+    }
+    .select-list {
+      .px2rem(padding-left, 24);
+      .px2rem(padding-right, 24);
+      background-color: #fff;
+      .categoty-item {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        .px2rem(height, 100);
+        font-size: 12px;
+        border-bottom: 1px solid @bg-color;
+        &:first-child {
+          .px2rem(margin-top, 16);
+        }
+
+        &:last-child {
+          border-bottom: 0;
+        }
+        .needDis{
+          width: 65px;
+          .circle {
+            display: inline-block;
+            .px2rem(width, 22);
+            .px2rem(height, 22);
+            .px2rem(margin-right, 8);
+            border: 1px solid #000000;
+            border-radius: 50%;
+            vertical-align: middle;
+          }
+        }
+        img {
+          .px2rem(width, 80);
+          .px2rem(height, 80);
+        }
+
+        .name {
+          .px2rem(width, 175);
+        }
+
+        .num {
+          .add {
+            color: @color-primary;
+          }
+          .decrease, .add {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            line-height: 1;
+            text-align: center;
+            border: 1px solid @color-primary;
+            border-radius: 50%;
+            vertical-align: middle;
+          }
+          .goods-number {
+            display: inline-block;
+            width: 12px;
+            text-align: center;
+          }
+
+          .decrease {
+            color: #999;
+            border-color: #999;
+          }
+        }
+      }
+      .description {
+        margin-top: -20px;
+        .px2rem(padding-top, 10);
+        .px2rem(padding-bottom, 10);
+        textarea {
+          color: @color-primary;
+          min-height: 50px;
+        }
+      }
+      .tips-warp {
+        width: 80%;
+        margin: 0 auto 20px;
+        color: @gray-font-color;
+      }
+    }
+  }
+
+  .total-info-warp {
+    display: flex;
+    align-items: center;
+    .px2rem(height, 220);
+    color: #fff;
+    .total-item {
+      border-radius: 5px;
+      width: 60%;
+      background-color: @color-primary;
+      margin: auto;
+      .px2rem(padding-left, 40);
+      .px2rem(padding-right, 40);
+      .item {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        .px2rem(height, 40);
+      }
     }
   }
 }
