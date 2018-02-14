@@ -161,6 +161,8 @@
 </template>
 
 <script>
+import BMap from 'BMap'
+
 export default {
   name: 'choice',
   data () {
@@ -399,9 +401,12 @@ export default {
   },
   mounted () {
     // 百度地图API功能
-    let map = new BMap.Map("allmap")
-    map.centerAndZoom(new BMap.Point(120.16675,30.25393), 15)
-    let marker = new BMap.Marker(new BMap.Point(120.16675,30.25393))
+    let map = new BMap.Map('allmap')
+    map.centerAndZoom(new BMap.Point(120.16675, 30.25393), 15)
+
+    let iconUrl = require('../../assets/colorful-box.png')
+    let myIcon = new BMap.Icon(iconUrl, new BMap.Size(40, 40))
+    let marker = new BMap.Marker(new BMap.Point(120.16675, 30.25393), {icon: myIcon})
     map.addOverlay(marker)
   },
   methods: {
