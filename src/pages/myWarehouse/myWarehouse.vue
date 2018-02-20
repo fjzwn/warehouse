@@ -3,15 +3,20 @@
     <mt-header fixed title="我的小仓库">
       <a href="javascript:;" slot="left" class="back"></a>
     </mt-header>
-    <mt-navbar v-model="currentStatus">
-      <mt-tab-item v-for="item in orderStatus" :id="item.id" :key="item.id">
-        <div slot="icon" class="icon-relative">
-          <img :src="item.icon">
-          <span class="number-circle">{{ item.number }}</span>
+    <div class="mint-navbar">
+      <a class="mint-tab-item" :class="currentStatus == item.id ? 'is-selected' : '' " @click="changeStatus(item.id)" v-for="item in orderStatus" :id="item.id" :key="item.id">
+        <span :class="currentStatus == item.id ? 'tab-box-shadow' : 'default-padding' ">
+         <div class="mint-tab-item-icon">
+            <div class="icon-relative"><img :src="item.icon">
+              <span class="number-circle">{{ item.number }}</span>
+            </div>
+         </div>
+        <div class="mint-tab-item-label">
+          {{ item.name }}
         </div>
-        {{ item.name }}
-      </mt-tab-item>
-    </mt-navbar>
+        </span>
+      </a>
+    </div>
     <mt-tab-container v-model="currentStatus">
       <mt-tab-container-item v-for="item in orderStatus" :key="item.id" :id="item.id">
         <div
@@ -172,6 +177,11 @@ export default {
   },
   mounted () {
 
+  },
+  methods: {
+    changeStatus (id) {
+      this.currentStatus = id
+    }
   }
 }
 </script>
@@ -209,6 +219,24 @@ export default {
     .mint-tab-item {
       &.is-selected {
         border-bottom: none;
+      }
+      .tab-box-shadow {
+        display: inline-block;
+        .px2rem(padding-top, 13);
+        .px2rem(padding-bottom, 13);
+        .px2rem(padding-left, 16);
+        .px2rem(padding-right, 16);
+        border: 1px solid #dedede;
+        border-top: none;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px #dedede;
+      }
+      .default-padding {
+        display: inline-block;
+        .px2rem(padding-top, 13);
+        .px2rem(padding-bottom, 13);
+        .px2rem(padding-left, 16);
+        .px2rem(padding-right, 16);
       }
       .icon-relative {
         position: relative;
