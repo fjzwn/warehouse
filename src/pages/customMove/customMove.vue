@@ -435,7 +435,17 @@ export default {
       return ids
     }
   },
-
+  watch: {
+    popupVisible (curVal) {
+      if (curVal === true) {
+        document.body.style.overflow = 'hidden'
+        document.html.style.overflow = 'hidden'
+      } else {
+        document.body.style.overflow = ''
+        document.html.style.overflow = ''
+      }
+    }
+  },
   mounted () {
 
   },
@@ -501,7 +511,9 @@ export default {
     color: red;
   }
   .mint-popup {
+    height: 65%;
     width: 100%;
+    overflow: scroll;
   }
 
   .mint-header {
