@@ -439,10 +439,9 @@ export default {
     popupVisible (curVal) {
       if (curVal === true) {
         document.body.style.overflow = 'hidden'
-        document.html.style.overflow = 'hidden'
       } else {
         document.body.style.overflow = ''
-        document.html.style.overflow = ''
+        document.getElementsByClassName('mint-popup mint-popup-bottom')[0].scrollTop = 0
       }
     }
   },
