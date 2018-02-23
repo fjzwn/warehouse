@@ -749,7 +749,9 @@ export default {
     }
     p.radio-group {
       margin-left: 18px;
-
+      input {
+        display: none;
+      }
       label:first-child {
         .px2rem(margin-right, 60);
       }
@@ -826,6 +828,9 @@ export default {
       }
     }
     .lift-radio-group {
+      input {
+        display: none;
+      }
       .px2rem(margin-left, 120);
       .radio-text {
         display: inline-block;
